@@ -420,7 +420,7 @@
         // Reemplaza estas URLs con tus propias imágenes
         const images = {
                 initial: "foto1.jpg",
-                rejections: ["foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg", "foto6.jpg", "foto7.jpg"],
+                rejections: ["foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg", "foto6.jpg", "foto1.jpg"],
                 accepted: "foto8.jpg"
         };
         
@@ -503,7 +503,7 @@
                 if (rejectionCount === rejectionMessages.length) {
                     const buttonContainer = document.getElementById('buttonContainer');
                     buttonContainer.innerHTML = `
-                        <button class="btn-yes" id="yesButton" style="font-size: ${1.3 + (rejectionCount * 0.3)}em; padding: ${18 + (rejectionCount * 5)}px ${50 + (rejectionCount * 10)}px;" onclick="acceptProposal()">💕 ¡Acepto! 💕</button>
+                        <button class="btn-yes" id="yesButton" style="font-size: ${1.3 + (rejectionCount * 0.15)}em; padding: ${18 + (rejectionCount * 3)}px ${50 + (rejectionCount * 5)}px; max-width: 90%;" onclick="acceptProposal()">💕 ¡Acepto! 💕</button>
                         <button class="btn-yes" onclick="acceptProposal()">Bueno, acepto 😊</button>
                     `;
                 }
@@ -513,14 +513,16 @@
         function growYesButton() {
             const yesButton = document.querySelector('.btn-yes');
             if (yesButton) {
-                // Incrementar tamaño del botón con cada rechazo
-                const newFontSize = 1.3 + (rejectionCount * 0.3); // Crece 0.3em cada vez
-                const newPadding = 18 + (rejectionCount * 5); // Crece 5px cada vez
-                const newPaddingX = 50 + (rejectionCount * 10); // Crece 10px cada vez
+                // Incrementar tamaño del botón con cada rechazo de manera más controlada
+                const newFontSize = 1.3 + (rejectionCount * 0.15); // Crece 0.15em cada vez (más moderado)
+                const newPadding = 18 + (rejectionCount * 3); // Crece 3px cada vez
+                const newPaddingX = 50 + (rejectionCount * 5); // Crece 5px cada vez
                 
                 yesButton.style.fontSize = newFontSize + 'em';
                 yesButton.style.padding = `${newPadding}px ${newPaddingX}px`;
                 yesButton.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                yesButton.style.maxWidth = '90%'; // Evitar que se salga del contenedor
+                yesButton.style.margin = '0 auto'; // Centrar el botón
                 
                 // Añadir un efecto de pulso al crecer
                 yesButton.style.animation = 'pulse 2.5s infinite ease-in-out, growPulse 0.6s ease-out';
