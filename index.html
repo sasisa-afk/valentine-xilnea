@@ -456,6 +456,25 @@
             }
         }
 
+        function scrollToContainer() {
+            // Hacer scroll suave hacia el inicio del contenedor
+            const container = document.getElementById('mainContainer');
+            
+            // Esperar un momento para que la imagen se actualice
+            setTimeout(() => {
+                // Calcular la posición para centrar la imagen en la pantalla
+                const containerRect = container.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const containerTop = containerRect.top + scrollTop;
+                
+                // Scroll suave hacia el contenedor
+                window.scrollTo({
+                    top: containerTop - 50, // 50px de margen superior
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
         function rejectProposal() {
             if (rejectionCount < rejectionMessages.length) {
                 document.getElementById('sadSection').style.display = 'block';
@@ -476,6 +495,9 @@
                 
                 // Hacer que el botón "Sí" crezca con cada rechazo
                 growYesButton();
+                
+                // Scroll suave hacia el contenedor
+                scrollToContainer();
                 
                 // En el último rechazo (6to intento), cambiar el botón "No acepto"
                 if (rejectionCount === rejectionMessages.length) {
@@ -519,7 +541,7 @@
                    </div>`;
             
             container.innerHTML = `
-                <h1 style="font-size: 3.5em; margin-bottom: 30px;">🎉 ¡SÍ! 🎉</h1>
+                <h1 style="font-size: 3.5em; margin-bottom: 30px;">🎉 ¡Esooooo! 🎉</h1>
                 ${acceptedImageHtml}
                 <div style="font-size: 2.5em; margin: 30px 0; color: #ff6b9d;">
                     💕💖💗💝💓💘
@@ -532,6 +554,9 @@
                     ¡Te amo muchisimo, mi Xilenita! 💕✨
                 </div>
             `;
+            
+            // Scroll suave hacia el contenedor
+            scrollToContainer();
             
             // Crear confeti mejorado
             createConfetti();
